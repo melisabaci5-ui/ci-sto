@@ -1,0 +1,246 @@
+/* Ci Sto Design System - Host Web Platform Tokens & Desktop Layout */
+:root {
+  /* Colour Tokens */
+  --color-blue: #2347FF;
+  --color-blue-dark: #1A33C2;
+  --color-blue-tint: #E3E8FF;
+  --color-lime: #CBEF4A;
+  --color-lime-tint: #EEF9C8;
+  --color-lime-text: #3F5200;
+  --color-ink: #16131D;
+  --color-cream: #FFF7F0;
+  --color-white: #FFFFFF;
+  --color-ci-sto-red: #D63A24;
+  --color-muted: #5E5866;
+  --color-line: #E4DCE6;
+  --color-surface-2: #F1ECF3;
+  --color-field-border: #8C8294;
+  --color-success: #3F7A1F;
+
+  /* Typography */
+  --font-title: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'Figtree', sans-serif;
+
+  /* Radii */
+  --radius-pill: 999px;
+  --radius-large-card: 22px;
+  --radius-card: 18px;
+  --radius-small-card: 14px;
+
+  /* Max Container Width for Desktop */
+  --desktop-max-width: 1240px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Accessibility Focus Ring */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--color-blue);
+  outline-offset: 2px;
+}
+
+/* Typography styles */
+.title-bricolage {
+  font-family: var(--font-title);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.body-figtree {
+  font-family: var(--font-body);
+}
+
+/* Reusable Components */
+.btn-primary {
+  height: 56px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-ci-sto-red);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 32px;
+  transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.btn-primary:hover {
+  opacity: 0.95;
+  box-shadow: 0 4px 14px rgba(214, 58, 36, 0.25);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  height: 48px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 24px;
+  transition: background-color 0.15s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-blue-dark);
+}
+
+.btn-outline {
+  height: 48px;
+  border-radius: var(--radius-pill);
+  background-color: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  border: 1.5px solid var(--color-field-border);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  transition: all 0.15s ease;
+}
+
+.btn-outline:hover {
+  border-color: var(--color-ink);
+  background-color: var(--color-surface-2);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.badge-lime {
+  background-color: var(--color-lime);
+  color: var(--color-ink);
+}
+
+.badge-lime-tint {
+  background-color: var(--color-lime-tint);
+  color: var(--color-lime-text);
+}
+
+.badge-blue-tint {
+  background-color: var(--color-blue-tint);
+  color: var(--color-blue-dark);
+}
+
+.badge-surface {
+  background-color: var(--color-surface-2);
+  color: var(--color-ink);
+}
+
+.chip {
+  min-height: 40px;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--color-field-border);
+  background-color: var(--color-white);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.chip.active {
+  background-color: var(--color-ink);
+  color: var(--color-white);
+  border-color: var(--color-ink);
+}
+
+.chip:hover:not(.active) {
+  border-color: var(--color-ink);
+}
+
+.card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-card);
+  border: 1.5px solid var(--color-line);
+  padding: 28px;
+}
+
+.card-highlight {
+  border-color: var(--color-blue);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.text-input {
+  height: 50px;
+  border-radius: 14px;
+  border: 1.5px solid var(--color-field-border);
+  background-color: var(--color-white);
+  padding: 0 18px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--color-ink);
+  width: 100%;
+  transition: border-color 0.15s ease;
+}
+
+.text-input::placeholder {
+  color: var(--color-muted);
+}
+
+.text-input:focus {
+  border-color: var(--color-blue);
+}

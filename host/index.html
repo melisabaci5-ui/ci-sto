@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ci Sto · Host Partner Web Platform</title>
+  <!-- Google Fonts: Bricolage Grotesque & Figtree -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    /* Desktop Web Layout Architecture */
+    .header-wrapper {
+      width: 100%;
+      background: var(--color-white);
+      border-bottom: 1.5px solid var(--color-line);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: var(--desktop-max-width);
+      margin: 0 auto;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      font-size: 26px;
+      color: var(--color-blue);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-surface-2);
+      padding: 4px;
+      border-radius: var(--radius-pill);
+    }
+
+    .nav-tab-btn {
+      border: none;
+      background: transparent;
+      padding: 8px 18px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-tab-btn.active {
+      background: var(--color-white);
+      color: var(--color-ink);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    .page-main {
+      max-width: var(--desktop-max-width);
+      width: 100%;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+      flex: 1;
+    }
+
+    /* 2-Column Desktop Grid */
+    .desktop-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .desktop-dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .view-section {
+      display: none;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .view-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Feature Value Cards on Desktop */
+    .value-cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .value-card {
+      background: var(--color-white);
+      border: 1.5px solid var(--color-line);
+      border-radius: var(--radius-card);
+      padding: 18px 22px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .value-icon-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-blue-tint);
+      color: var(--color-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .chips-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* KPI Grid on Dashboard */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .kpi-card {
+      background: var(--color-white);
+      border: 1.5px solid var(--color-line);
+      border-radius: var(--radius-card);
+      padding: 20px;
+    }
+
+    .kpi-number {
+      font-size: 32px;
+      font-weight: 800;
+      font-family: var(--font-title);
+      color: var(--color-blue);
+      letter-spacing: -0.5px;
+    }
+
+    .kpi-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-muted);
+      margin-top: 4px;
+    }
+
+    /* Live Preview Component Card */
+    .preview-phone-frame {
+      background: var(--color-surface-2);
+      border: 2px dashed var(--color-field-border);
+      border-radius: var(--radius-large-card);
+      padding: 28px;
+    }
+
+    .mockup-card {
+      background: var(--color-white);
+      border-radius: var(--radius-card);
+      border: 1.5px solid var(--color-line);
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(22, 19, 29, 0.06);
+    }
+
+    .mockup-img-placeholder {
+      height: 180px;
+      background: linear-gradient(135deg, #2347FF 0%, #1A33C2 100%);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: white;
+    }
+
+    .footer-bar {
+      max-width: var(--desktop-max-width);
+      margin: 0 auto;
+      padding: 24px 32px;
+      border-top: 1px solid var(--color-line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--color-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================== -->
+  <!-- DESKTOP TOP NAVIGATION                         -->
+  <!-- ============================================== -->
+  <header class="header-wrapper" role="banner">
+    <div class="header-content">
+      <div class="brand-group">
+        <a href="#" class="brand-logo title-bricolage" aria-label="Ci Sto Platform">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 6v6l4 2"></path>
+          </svg>
+          Ci Sto
+        </a>
+        <span class="badge badge-surface" style="font-size: 12px;">Web Platform · Host</span>
+      </div>
+
+      <!-- Navigation Steps Tabs -->
+      <nav class="nav-tabs" aria-label="Desktop steps navigation">
+        <button type="button" id="tab-1" class="nav-tab-btn active">
+          <span>1. Host Onboarding</span>
+        </button>
+        <button type="button" id="tab-2" class="nav-tab-btn">
+          <span>2. Business Setup</span>
+        </button>
+        <button type="button" id="tab-3" class="nav-tab-btn">
+          <span>3. Dashboard & Filters</span>
+        </button>
+      </nav>
+
+      <!-- Right Support Pill -->
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span class="badge badge-lime-tint">Polimi Pilot (Bovisa & Isola)</span>
+        <button type="button" class="btn-outline" style="height: 38px; font-size: 13px; padding: 0 16px;">
+          Partner Support
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================== -->
+  <!-- MAIN DESKTOP CONTENT                           -->
+  <!-- ============================================== -->
+  <main class="page-main" role="main">
+
+    <!-- ============================================== -->
+    <!-- VIEW 1: HOST ONBOARDING (DESKTOP)              -->
+    <!-- ============================================== -->
+    <section id="step-onboarding" class="view-section active" aria-labelledby="hero-title">
+      <div class="desktop-grid">
+        
+        <!-- Left Column: Hero & Value Props -->
+        <div>
+          <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+            <span class="badge badge-blue-tint">Verified Student Community</span>
+            <span class="badge badge-lime">Welcome Week 2026</span>
+          </div>
+
+          <h1 id="hero-title" class="title-bricolage" style="font-size: 42px; line-height: 1.15; margin-bottom: 16px;">
+            Fill your venue on quiet days with university students.
+          </h1>
+
+          <p class="body-figtree" style="font-size: 17px; line-height: 1.5; color: var(--color-muted); margin-bottom: 24px;">
+            Connect directly with verified Politecnico di Milano master's and international students looking for places to study, socialize, and meet in groups. No upfront fees — you only pay when verified student groups show up.
+          </p>
+
+          <!-- Value feature cards -->
+          <div class="value-cards-list">
+            <div class="value-card">
+              <div class="value-icon-circle">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <div>
+                <strong style="font-size: 15px; color: var(--color-ink);">Groups of 4–8 students</strong>
+                <p style="font-size: 13px; color: var(--color-muted); margin-top: 2px;">
+                  Double opt-in activity reservations. Students confirm 24 hours prior, eliminating ghosting and empty tables.
+                </p>
+              </div>
+            </div>
+
+            <div class="value-card">
+              <div class="value-icon-circle" style="background: var(--color-lime-tint); color: var(--color-lime-text);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="1" x2="12" y2="23"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+              <div>
+                <strong style="font-size: 15px; color: var(--color-ink);">Zero upfront costs</strong>
+                <p style="font-size: 13px; color: var(--color-muted); margin-top: 2px;">
+                  Free to join. Performance-based pilot: you pay a small fee only per verified attendee who visits your venue.
+                </p>
+              </div>
+            </div>
+
+            <div class="value-card">
+              <div class="value-icon-circle" style="background: var(--color-surface-2); color: var(--color-ink);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <div>
+                <strong style="font-size: 15px; color: var(--color-ink);">Politecnico verified students only</strong>
+                <p style="font-size: 13px; color: var(--color-muted); margin-top: 2px;">
+                  All members sign up with an <code>@mail.polimi.it</code> academic address. Respectful, trusted academic crowd.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Registration Card -->
+        <div class="card" style="box-shadow: 0 12px 32px rgba(22, 19, 29, 0.04);">
+          <div style="border-bottom: 1.5px solid var(--color-line); padding-bottom: 16px; margin-bottom: 24px;">
+            <h2 class="title-bricolage" style="font-size: 22px; color: var(--color-ink);">
+              Register your venue as a Partner
+            </h2>
+            <p style="font-size: 14px; color: var(--color-muted); margin-top: 4px;">
+              Step 1 of 3: Provide basic business details to get started.
+            </p>
+          </div>
+
+          <div class="input-group">
+            <label for="venue-name">Venue or business name *</label>
+            <input type="text" id="venue-name" class="text-input" placeholder="e.g. Caffè Ventura, Bar Lumen..." value="Caffè Ventura">
+          </div>
+
+          <div class="input-group">
+            <label>Venue category</label>
+            <div class="chips-group" id="chips-category" role="group" aria-label="Select venue type">
+              <button type="button" class="chip active" data-val="Bar & Café">Bar & Café</button>
+              <button type="button" class="chip" data-val="Aperitivo">Aperitivo</button>
+              <button type="button" class="chip" data-val="Coworking & Study">Coworking & Study</button>
+              <button type="button" class="chip" data-val="Restaurant">Restaurant</button>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="input-group">
+              <label for="venue-address">Street address in Milan *</label>
+              <input type="text" id="venue-address" class="text-input" placeholder="e.g. Via Durando 10" value="Via Durando 10">
+            </div>
+            <div class="input-group">
+              <label for="venue-district">District / Campus Area *</label>
+              <input type="text" id="venue-district" class="text-input" placeholder="e.g. Bovisa, Isola..." value="Bovisa">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="input-group">
+              <label for="contact-name">Manager / Contact person *</label>
+              <input type="text" id="contact-name" class="text-input" placeholder="e.g. Marco Rossi" value="Marco Rossi">
+            </div>
+            <div class="input-group">
+              <label for="contact-email">Business email *</label>
+              <input type="email" id="contact-email" class="text-input" placeholder="manager@venue.com" value="info@caffeventura.it">
+            </div>
+          </div>
+
+          <div style="margin-top: 8px;">
+            <button type="button" id="btn-to-step-2" class="btn-primary" style="width: 100%;">
+              <span>Continue: Business Setup</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- VIEW 2: BUSINESS SETUP (DESKTOP)               -->
+    <!-- ============================================== -->
+    <section id="step-setup" class="view-section" aria-labelledby="setup-title">
+      <div class="desktop-grid">
+
+        <!-- Left Column: Business Setup Form -->
+        <div class="card">
+          <div style="border-bottom: 1.5px solid var(--color-line); padding-bottom: 16px; margin-bottom: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <h2 id="setup-title" class="title-bricolage" style="font-size: 24px;">
+                Configure group availability & perks
+              </h2>
+              <span class="badge badge-surface">Step 2 of 3</span>
+            </div>
+            <p style="font-size: 14px; color: var(--color-muted); margin-top: 4px;">
+              Specify how many students you can comfortably seat and set up special offers for Ci Sto Plus members.
+            </p>
+          </div>
+
+          <!-- Capacity -->
+          <div class="input-group">
+            <label>Reserved spots per group table</label>
+            <div class="chips-group" id="chips-capacity" role="group">
+              <button type="button" class="chip" data-val="4-6">4–6 spots</button>
+              <button type="button" class="chip active" data-val="6-8">6–8 spots (Standard)</button>
+              <button type="button" class="chip" data-val="8-12">8–12 spots</button>
+              <button type="button" class="chip" data-val="12+">12+ spots (Entire room)</button>
+            </div>
+          </div>
+
+          <!-- Time slots -->
+          <div class="input-group">
+            <label>Preferred time slots for student group visits</label>
+            <div class="chips-group" id="chips-time" role="group">
+              <button type="button" class="chip" data-val="Morning">Morning Coffee (08:30–12:00)</button>
+              <button type="button" class="chip" data-val="Afternoon">Afternoon Study (14:00–18:00)</button>
+              <button type="button" class="chip active" data-val="Aperitivo">Evening Aperitivo (18:30–21:00)</button>
+              <button type="button" class="chip" data-val="Late Night">Late Night (21:30+)</button>
+            </div>
+          </div>
+
+          <!-- Ci Sto Plus perk builder -->
+          <div class="notice-box" role="status" style="border-radius: var(--radius-card); padding: 18px 20px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span class="badge badge-lime">Ci Sto Plus Deal</span>
+              <strong style="color: var(--color-ink);">Official Member Benefit</strong>
+            </div>
+            <p style="font-size: 13px; color: var(--color-blue-dark); line-height: 1.45;">
+              Ci Sto Plus subscribers unlock partner discounts nearby. Participating venues receive priority placement on student map searches.
+            </p>
+          </div>
+
+          <div class="input-group">
+            <label for="perk-title">Proposed deal or discount headline</label>
+            <input type="text" id="perk-title" class="text-input" placeholder="e.g. -20% on coffee & evening aperitivo" value="-20% on coffee & evening drinks">
+          </div>
+
+          <div class="form-row">
+            <div class="input-group">
+              <label for="instagram-url">Instagram handle or photos</label>
+              <input type="text" id="instagram-url" class="text-input" placeholder="@yourvenue" value="@caffeventura_milano">
+            </div>
+            <div class="input-group">
+              <label for="booking-notice">Advance booking notice</label>
+              <input type="text" id="booking-notice" class="text-input" placeholder="e.g. 24 hours prior" value="24 hours before">
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 14px; margin-top: 16px;">
+            <button type="button" id="btn-back-to-1" class="btn-outline" style="width: 35%;">← Back to Details</button>
+            <button type="button" id="btn-to-step-3" class="btn-primary" style="width: 65%;">
+              <span>Go to Host Filters & Dashboard →</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Column: Live Student Feed Preview -->
+        <div class="preview-phone-frame">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <span style="font-size: 13px; font-weight: 800; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.5px;">
+              Live Student Feed Preview
+            </span>
+            <span class="badge badge-lime-tint">How students see your venue</span>
+          </div>
+
+          <div class="mockup-card">
+            <div class="mockup-img-placeholder">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="badge badge-lime" style="font-size: 11px;">Partner Venue</span>
+                <span class="badge" style="background: rgba(0,0,0,0.4); color: white; font-size: 11px;">120m from Polimi</span>
+              </div>
+              <div>
+                <span style="font-size: 12px; font-weight: 600; opacity: 0.9;">Bovisa Campus Area</span>
+                <h3 id="preview-venue-name" class="title-bricolage" style="font-size: 22px; color: white;">Caffè Ventura</h3>
+              </div>
+            </div>
+
+            <div style="padding: 20px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span id="preview-perk-badge" class="badge badge-lime-tint" style="font-size: 13px;">
+                  −20% with Ci Sto Plus
+                </span>
+                <span style="font-size: 13px; font-weight: 700; color: var(--color-success);">
+                  Open until 23:00
+                </span>
+              </div>
+
+              <p style="font-size: 14px; color: var(--color-muted); line-height: 1.45; margin-bottom: 16px;">
+                Spacious student-friendly tables, fast Wi-Fi, and reserved areas for Politecnico study sessions and evening drinks.
+              </p>
+
+              <div style="border-top: 1px solid var(--color-line); padding-top: 14px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--color-muted);">
+                <span>👥 Reserved for groups: <strong>6–8 spots</strong></span>
+                <span>⭐ Vibe score: <strong>4.9/5</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- VIEW 3: HOST DASHBOARD & FILTERS (DESKTOP)     -->
+    <!-- ============================================== -->
+    <section id="step-filters" class="view-section" aria-labelledby="dash-title">
+      
+      <!-- Top Title and Status Header -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px;">
+        <div>
+          <h1 id="dash-title" class="title-bricolage" style="font-size: 32px;">
+            Host Dashboard & Filters
+          </h1>
+          <p style="font-size: 15px; color: var(--color-muted); margin-top: 4px;">
+            Manage venue filters, view incoming student group reservations, and track pilot performance.
+          </p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="badge badge-lime" style="font-size: 14px; padding: 8px 18px;">
+            ● Active Partner (Bovisa)
+          </span>
+          <button type="button" id="btn-back-to-setup" class="btn-outline" style="height: 42px; font-size: 13px;">
+            Edit Venue Settings
+          </button>
+        </div>
+      </div>
+
+      <!-- Desktop 4-KPI Row -->
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-number">24</div>
+          <div class="kpi-label">Polimi Students Hosted</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-number">5</div>
+          <div class="kpi-label">Confirmed Group Plans</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-number">€340</div>
+          <div class="kpi-label">Estimated Food & Drink Spend</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-number">4.9 ★</div>
+          <div class="kpi-label">Student Vibe Score</div>
+        </div>
+      </div>
+
+      <!-- 2-Column Dashboard Grid -->
+      <div class="desktop-dashboard-grid">
+
+        <!-- Column A: Filters Management Card -->
+        <div class="card">
+          <div style="border-bottom: 1.5px solid var(--color-line); padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <h2 class="title-bricolage" style="font-size: 20px;">Accepted Plan Filters</h2>
+              <p style="font-size: 13px; color: var(--color-muted);">Only allow student plans that match these criteria to reserve your venue.</p>
+            </div>
+            <span class="badge badge-lime-tint">Auto-filter active</span>
+          </div>
+
+          <!-- Language Filter -->
+          <div class="input-group">
+            <label>Student group language</label>
+            <div class="chips-group" id="filter-lang" role="group">
+              <button type="button" class="chip active" data-val="all">All languages</button>
+              <button type="button" class="chip" data-val="it">Italian only</button>
+              <button type="button" class="chip" data-val="en">English / International</button>
+            </div>
+          </div>
+
+          <!-- Faculty Filter -->
+          <div class="input-group">
+            <label>Politecnico field of study</label>
+            <div class="chips-group" id="filter-faculty" role="group">
+              <button type="button" class="chip active" data-val="all">All fields</button>
+              <button type="button" class="chip" data-val="design">Design</button>
+              <button type="button" class="chip" data-val="ing">Engineering</button>
+              <button type="button" class="chip" data-val="arch">Architecture</button>
+            </div>
+          </div>
+
+          <!-- Budget Bracket -->
+          <div class="input-group">
+            <label>Budget bracket per student</label>
+            <div class="chips-group" id="filter-budget" role="group">
+              <button type="button" class="chip active" data-val="free">Free / Regular order</button>
+              <button type="button" class="chip" data-val="under10">Under €10</button>
+              <button type="button" class="chip" data-val="10-20">€10–€20</button>
+            </div>
+          </div>
+
+          <!-- Minimum Notice -->
+          <div class="input-group">
+            <label>Double opt-in & Confirmation rule</label>
+            <div style="background: var(--color-surface-2); border-radius: var(--radius-small-card); padding: 14px; font-size: 13px; color: var(--color-ink); line-height: 1.4;">
+              ✓ Groups must confirm attendance <strong>24 hours before</strong>.<br>
+              ✓ Minimum 4 students, maximum 8 students per table.
+            </div>
+          </div>
+
+          <button type="button" id="btn-save-filters" class="btn-secondary" style="width: 100%; margin-top: 8px;">
+            Save & Update Filter Preferences
+          </button>
+        </div>
+
+        <!-- Column B: Live Plans Calendar & Upcoming Bookings -->
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h2 class="title-bricolage" style="font-size: 20px;">Upcoming Student Visits</h2>
+            <span style="font-size: 13px; color: var(--color-blue); font-weight: 700;">2 reservations this week</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            
+            <!-- Reservation 1 -->
+            <div class="card card-highlight">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                <div>
+                  <span class="badge badge-lime-tint" style="font-size: 11px; margin-bottom: 6px;">7/8 Confirmed</span>
+                  <h3 class="title-bricolage" style="font-size: 18px; color: var(--color-ink);">Welcome Design Aperitivo</h3>
+                </div>
+                <span style="font-size: 14px; font-weight: 800; color: var(--color-blue);">Thu 20 Nov · 19:30</span>
+              </div>
+              <p style="font-size: 13px; color: var(--color-muted); line-height: 1.45; margin-bottom: 14px;">
+                Organizer: <strong>Elena</strong> (Politecnico Design Master) · Table reserved for 8 · Budget: Under €10 aperitivo.
+              </p>
+              <div style="display: flex; gap: 10px;">
+                <button type="button" class="btn-secondary" style="height: 38px; font-size: 13px; padding: 0 16px;">
+                  Confirm Table Ready
+                </button>
+                <button type="button" class="btn-outline" style="height: 38px; font-size: 13px; padding: 0 14px;">
+                  Message Group
+                </button>
+              </div>
+            </div>
+
+            <!-- Reservation 2 -->
+            <div class="card">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                <div>
+                  <span class="badge badge-blue-tint" style="font-size: 11px; margin-bottom: 6px;">4/6 Confirmed</span>
+                  <h3 class="title-bricolage" style="font-size: 18px; color: var(--color-ink);">Study & Coffee Sprint</h3>
+                </div>
+                <span style="font-size: 14px; font-weight: 800; color: var(--color-ink);">Fri 21 Nov · 15:00</span>
+              </div>
+              <p style="font-size: 13px; color: var(--color-muted); line-height: 1.45; margin-bottom: 14px;">
+                Organizer: <strong>Matteo</strong> (Management Engineering) · 4 students with laptops · Afternoon study slot.
+              </p>
+              <div style="display: flex; gap: 10px;">
+                <button type="button" class="btn-outline" style="height: 38px; font-size: 13px; padding: 0 14px;">
+                  View Plan Details
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Desktop Footer -->
+  <footer class="footer-bar">
+    <div>
+      <strong>Ci Sto</strong> · Student Activity Platform & Partner Network · Politecnico di Milano
+    </div>
+    <div>
+      Host area owner: <strong>Riki</strong> (branch: <code>feature/host</code>)
+    </div>
+  </footer>
+
+  <script src="host.js"></script>
+</body>
+</html>
