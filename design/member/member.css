@@ -183,7 +183,14 @@ textarea.input { height: 124px; padding: 14px 18px; resize: vertical; line-heigh
 .plan-card .photo .badge { position: absolute; top: 16px; left: 16px; }
 .plan-card .body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 10px; }
 .plan-card h3 { font-size: 19px; font-weight: 800; line-height: 1.2; }
-.ph-ap { background: linear-gradient(135deg, #f0a35e, #7a4b3a); } .ph-pitch { background: linear-gradient(135deg, #5b4a3d, #1f1a17); } .ph-dol { background: linear-gradient(160deg, #9fc1d9, #6b8f4e 60%, #3e5a2e); }
+/* Plan photos: the same images as the Figma page "03 · Web v2", frame "Photos (assets)" */
+.ph-ap, .ph-pitch, .ph-dol, .ph-lumen, .ph-jazz, .ph-bike { background-size: cover; background-position: center; background-color: var(--surface-2); }
+.ph-ap { background-image: url("img/aperitivo-navigli.jpg"); }
+.ph-pitch { background-image: url("img/pitch-night-polihub.jpg"); }
+.ph-dol { background-image: url("img/dolomites-seceda.jpg"); }
+.ph-lumen { background-image: url("img/language-swap-bar-lumen.jpg"); }
+.ph-jazz { background-image: url("img/jazz-night-isola.jpg"); }
+.ph-bike { background-image: url("img/bike-ride-martesana.jpg"); }
 
 /* Chats */
 .chat-layout { display: grid; grid-template-columns: 352px 1fr 320px; gap: 24px; align-items: start; padding: 32px 64px 64px; max-width: 1440px; margin: 0 auto; }
